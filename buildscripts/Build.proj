@@ -1,0 +1,69 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="default">
+	<PropertyGroup>
+		<BaseDir>$(MSBuildProjectDirectory)\..</BaseDir>
+		<Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+		<BuildDir>$(BaseDir)\build</BuildDir>
+		<OutputDir>$(BuildDir)\$(Configuration)</OutputDir>
+		<PackageDir>$(BuildDir)\Packages</PackageDir>
+		<SolutionFile>$(BaseDir)\SimpleHoneypot.sln</SolutionFile>
+
+		<MSBuildExtensions>$(BaseDir)\lib\msbuild\msbuild.community.tasks.dll</MSBuildExtensions>
+	</PropertyGroup>
+	<UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.Zip" />
+	<UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
+	
+	<Target Name="default" DependsOnTargets="Compile; Deploy; Package" />
+	
+	<Target Name="Compile">
+		<MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
+	</Target>
+
+	<Target Name="Package" DependsOnTargets="Deploy; PackageZip; PackageNuPack" />
+
+	<Target Name="Deploy">
+		<RemoveDir Directories="$(BuildDir)" />
+		
+		<ItemGroup>
+			<MainBinaries Include="$(BaseDir)\src\SimpleHoneypot\bin\$(Configuration)\**\*.*" />
+			<AppStart Include="$(BaseDir)\buildscripts\App_start\**\*.*" />
+		</ItemGroup>
+
+		<!-- Copy to the output directory -->
+		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(OutputDir)\SimpleHoneypot\%(RecursiveDir)"  />
+	</Target>
+
+	<Target Name="PackageZip">
+		<ItemGroup>
+			<FilesToZip Include="$(OutputDir)\**\*.*" />
+		</ItemGroup>
+		<Zip Files="@(FilesToZip)" ZipFileName="$(BuildDir)\SimpleHoneypot.zip" WorkingDirectory="$(OutputDir)" />
+	</Target>
+
+	<Target Name="PackageNuPack" DependsOnTargets="Deploy">
+		
+		<!-- First copy the nuspec template files to the package dir -->
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\SimpleHoneypot.nuspec" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot" />
+
+		<!-- Copy the source files to the package dir -->
+		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
+		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net20\%(RecursiveDir)" />
+		<Copy SourceFiles="@(AppStart)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\content\App_Start\%(RecursiveDir)" />
+    
+		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
+		<GetAssemblyIdentity AssemblyFiles="$(OutputDir)\SimpleHoneypot\SimpleHoneypot.dll">
+			<Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+		</GetAssemblyIdentity>
+
+		<!-- insert the version number into the nuspec files -->
+		<XmlUpdate
+		  Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+			XmlFileName="$(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot.nuspec"
+			XPath="/package/metadata/version"
+			Value="%(AsmInfo.Version)" />
+
+		<Exec WorkingDirectory='$(BuildDir)\Packages' 
+			  Command='"$(BaseDir)\lib\nuget\nuget .exe" pack $(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot.nuspec' />
+		
+		<RemoveDir Directories="$(PackageDir)\temp" />
+	</Target>
+</Project>

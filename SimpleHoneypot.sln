@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot", "src\SimpleHoneypot\SimpleHoneypot.csproj", "{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot.Tests", "src\SimpleHoneypot.Tests\SimpleHoneypot.Tests.csproj", "{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot.Web.Tests", "src\SimpleHoneypot.Web.Tests\SimpleHoneypot.Web.Tests.csproj", "{04738723-C466-474D-85F5-879816A1DAA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04738723-C466-474D-85F5-879816A1DAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04738723-C466-474D-85F5-879816A1DAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04738723-C466-474D-85F5-879816A1DAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04738723-C466-474D-85F5-879816A1DAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

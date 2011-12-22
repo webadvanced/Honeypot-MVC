@@ -1,0 +1,10 @@
+﻿@using SimpleHoneypot.HtmlHelpers
+@model SimpleHoneypot.Web.Tests.Models.EmailSubscriber
+
+@using(Html.BeginForm("Subscribe", "Home")) {
+    @Html.EditorForModel()
+    @Html.HoneypotInput()
+    <p>
+        <input type="submit" value="Subscribe" />
+    </p>
+}

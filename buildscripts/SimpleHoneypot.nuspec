@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>SimpleHoneypot.MVC</id>
+    <version></version>
+    <authors>Web Advanced</authors>
+    <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=FluentValidation&amp;DownloadId=166226</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</description>
+    <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</summary>
+    <language>en-US</language>
+	<dependencies>
+      <dependency id="WebActivator" version="1.4.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\content\**\*.pp" target="content" />
+	<file src="lib\**\*.dll" target="lib" />
+  </files>
+</package>
