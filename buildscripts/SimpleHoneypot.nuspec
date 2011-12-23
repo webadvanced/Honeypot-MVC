@@ -5,7 +5,6 @@
     <version></version>
     <authors>Web Advanced</authors>
     <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
-    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=FluentValidation&amp;DownloadId=166226</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</description>
     <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</summary>
