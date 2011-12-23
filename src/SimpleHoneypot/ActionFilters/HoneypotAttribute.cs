@@ -28,14 +28,9 @@ namespace SimpleHoneypot.ActionFilters {
                     filterContext.Controller.TempData[Honeypot.TempDataKey].ToString()];
             if (string.IsNullOrWhiteSpace(val)) return;
 
-            HandelFailedRequest(filterContext);
+            filterContext.HttpContext.Response.Redirect(_redirectUrl);
         }
 
         #endregion
-
-        protected virtual void HandelFailedRequest(AuthorizationContext filterContext) {
-            //Redirect to the root returning a HTTP 200
-            filterContext.HttpContext.Response.Redirect(_redirectUrl);
-        }
     }
 }

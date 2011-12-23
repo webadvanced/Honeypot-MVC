@@ -5,6 +5,7 @@
     <version></version>
     <authors>Web Advanced</authors>
     <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
+    <iconUrl>https://fileserver2.myteamworkpm.net/?action=serveFile&display=1&sd=373b968a-1631-B9B744001817114A5EE6651EE9466832DE6DEAB8BB8201D72DB2D9EF9AC78DBC6BD4DBDD8243566D24D7FF3CEFDC1E09</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</description>
     <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</summary>
