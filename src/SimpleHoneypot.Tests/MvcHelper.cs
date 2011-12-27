@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Moq;
+using SimpleHoneypot.Core;
 
 namespace SimpleHoneypot.Tests {
     public static class MvcHelper {
@@ -28,11 +30,12 @@ namespace SimpleHoneypot.Tests {
                               {
                                   HttpContext = httpcontext,
                                   RouteData = rd,
-                                  ViewData = vdd
+                                  ViewData = vdd,
+                                  TempData = new TempDataDictionary()
                               };
             var mockVdc = new Mock<IViewDataContainer>();
             mockVdc.Setup(vdc => vdc.ViewData).Returns(vdd);
-
+            
             var htmlHelper = new HtmlHelper<object>(viewContext, mockVdc.Object, rt);
             return htmlHelper;
         }
@@ -158,6 +161,31 @@ namespace SimpleHoneypot.Tests {
             var mockContainer = new Mock<IViewDataContainer>();
             mockContainer.Setup(c => c.ViewData).Returns(viewData);
             return mockContainer.Object;
+        }
+
+        public static AuthorizationContext BuildAuthorizationContext(bool addFormValue) {
+            string fakeInputName = "Fake-Input-Name";
+            var request = new Mock<HttpRequestBase>();
+            request.Setup(r => r.HttpMethod).Returns("POST");
+            request.Setup(r => r.Headers).Returns(new NameValueCollection());
+            request.Setup(r => r.Form).Returns(new NameValueCollection());
+            request.Setup(r => r.QueryString).Returns(new NameValueCollection());
+            request.Setup(r => r.Files).Returns(new Mock<HttpFileCollectionBase>().Object);
+
+            var mockHttpContext = new Mock<HttpContextBase>();
+            mockHttpContext.Expect(c => c.Request).Returns(request.Object);
+            mockHttpContext.Setup(c => c.Session).Returns((HttpSessionStateBase)null);
+            if (addFormValue) {
+                var form = new NameValueCollection { { fakeInputName, "I Am A Spam Bot!" } };
+                mockHttpContext.Setup(c => c.Request.Form).Returns(form);
+            }
+
+            var controllerContext = new ControllerContext(mockHttpContext.Object, new RouteData(), new Mock<ControllerBase>().Object);
+            controllerContext.Controller.TempData = new TempDataDictionary();
+            controllerContext.Controller.TempData.Add(Honeypot.TempDataKey, "Fake-Input-Name");
+
+
+            return new AuthorizationContext(controllerContext);
         }
     }
 }
