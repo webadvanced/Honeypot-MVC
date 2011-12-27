@@ -22,7 +22,8 @@ namespace SimpleHoneypot.ActionFilters {
                 throw new ArgumentNullException("filterContext", "filterContext cannot be null");
 
             if (filterContext.Controller.TempData[Honeypot.TempDataKey] == null)
-                throw new InvalidOperationException("HoneypotInput must be in the executing form collection");
+                throw new InvalidOperationException("HoneypotInput must be in the form collection");
+            
             string val =
                 filterContext.HttpContext.Request.Form[
                     filterContext.Controller.TempData[Honeypot.TempDataKey].ToString()];
