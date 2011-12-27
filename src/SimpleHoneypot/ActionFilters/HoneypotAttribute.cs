@@ -28,7 +28,7 @@ namespace SimpleHoneypot.ActionFilters {
                     filterContext.Controller.TempData[Honeypot.TempDataKey].ToString()];
             if (string.IsNullOrWhiteSpace(val)) return;
 
-            filterContext.HttpContext.Response.Redirect(_redirectUrl);
+            filterContext.Result = new RedirectResult(_redirectUrl);
         }
 
         #endregion

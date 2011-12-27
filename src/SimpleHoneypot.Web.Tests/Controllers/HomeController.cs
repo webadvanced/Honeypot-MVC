@@ -13,7 +13,7 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
         public ActionResult About() {
             return View();
         }
-        [Honeypot]
+        [Honeypot("/Home/About")]
         public ActionResult Subscribe(EmailSubscriber subscriber) {
             return RedirectToAction("Index");
         }
