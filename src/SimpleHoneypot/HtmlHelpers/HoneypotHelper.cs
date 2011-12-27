@@ -18,7 +18,7 @@ namespace SimpleHoneypot.HtmlHelpers {
                 string[] keys = Honeypot.InputNames.OrderBy(x => random.Next()).Take(2).ToArray();
                 inputName = String.Format("{0}-{1}", keys[0], keys[1]);
             }
-            helper.ViewContext.TempData[Honeypot.TempDataKey] = inputName;
+            helper.ViewContext.Controller.TempData[Honeypot.TempDataKey] = inputName;
             return helper.TextBox(inputName, string.Empty, new {@class = Honeypot.CssClassName});
         }
     }

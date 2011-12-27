@@ -3,10 +3,14 @@ using System.Web.Mvc;
 using Moq;
 using SimpleHoneypot.ActionFilters;
 using Xunit;
+using System.Collections.Specialized;
 
 namespace SimpleHoneypot.Tests {
     public class HoneypotAttributeTests {
-        [Fact]
+
+        private NameValueCollection _from = new NameValueCollection { { MvcHelper.FakeInputName, "I Am a Bot" } };
+
+    [Fact]
         public void OnAuthorization_ShouldThrowArgumentNullException_WhenFilterContextIsNull() {
             var attribue = new HoneypotAttribute();
 
@@ -23,7 +27,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldReturn_WhenHoneypotKeyIsNotInTempData() {
-            var filterContext = MvcHelper.BuildAuthorizationContext(false);
+            var filterContext = MvcHelper.GetAuthorizationContext();
             var attribue = new HoneypotAttribute();
 
             attribue.OnAuthorization(filterContext);
@@ -33,7 +37,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldRedirectToRootByDefault_WhenTempDataKeyHasValue() {
-            var filterContext = MvcHelper.BuildAuthorizationContext(true);
+            var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute();
 
             attribue.OnAuthorization(filterContext);
@@ -45,7 +49,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldRedirectToProvidedUrl_WhenTempDataKeyHasValue() {
-            var filterContext = MvcHelper.BuildAuthorizationContext(true);
+            var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute("/Handle/Bot");
 
             attribue.OnAuthorization(filterContext);

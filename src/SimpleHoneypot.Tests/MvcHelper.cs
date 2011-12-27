@@ -5,13 +5,14 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI;
 using Moq;
 using SimpleHoneypot.Core;
 
 namespace SimpleHoneypot.Tests {
     public static class MvcHelper {
         public const string AppPathModifier = "/$(SESSION)";
-
+        public const string FakeInputName = "Fake-Input-Name";
         public static HtmlHelper<object> GetHtmlHelper() {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null);
             var rt = new RouteCollection();
@@ -31,7 +32,7 @@ namespace SimpleHoneypot.Tests {
                                   HttpContext = httpcontext,
                                   RouteData = rd,
                                   ViewData = vdd,
-                                  TempData = new TempDataDictionary()
+                                  Controller = GetControllerContext().Controller
                               };
             var mockVdc = new Mock<IViewDataContainer>();
             mockVdc.Setup(vdc => vdc.ViewData).Returns(vdd);
@@ -41,7 +42,7 @@ namespace SimpleHoneypot.Tests {
         }
 
         public static HtmlHelper GetHtmlHelper(string protocol, int port) {
-            HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port);
+            HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port, null);
             var rt = new RouteCollection();
             rt.Add(new Route("{controller}/{action}/{id}", null)
                    {Defaults = new RouteValueDictionary(new {id = "defaultid"})});
@@ -107,7 +108,7 @@ namespace SimpleHoneypot.Tests {
         }
 
         public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod,
-                                                     string protocol, int port) {
+                                                     string protocol, int port, NameValueCollection form) {
             var mockHttpContext = new Mock<HttpContextBase>();
 
             if (!String.IsNullOrEmpty(appPath)) {
@@ -131,7 +132,12 @@ namespace SimpleHoneypot.Tests {
             if (!String.IsNullOrEmpty(httpMethod)) {
                 mockHttpContext.Setup(o => o.Request.HttpMethod).Returns(httpMethod);
             }
-
+            if (form != null) {
+                mockHttpContext.Setup(c => c.Request.Form).Returns(form);
+            }
+            else {
+                mockHttpContext.Setup(c => c.Request.Form).Returns(new NameValueCollection());
+            }
             mockHttpContext.Setup(o => o.Session).Returns((HttpSessionStateBase) null);
             mockHttpContext.Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(
                 r => AppPathModifier + r);
@@ -140,7 +146,15 @@ namespace SimpleHoneypot.Tests {
         }
 
         public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod) {
-            return GetHttpContext(appPath, requestPath, httpMethod, Uri.UriSchemeHttp, -1);
+            return GetHttpContext(appPath, requestPath, httpMethod, Uri.UriSchemeHttp, -1, null);
+        }
+
+        public static HttpContextBase GetHttpContext(NameValueCollection form) {
+            return GetHttpContext("", "/", "POST", Uri.UriSchemeHttp, -1, form);
+        }
+
+        public static HttpContextBase GetHttpContext() {
+            return GetHttpContext("", "/", "POST", Uri.UriSchemeHttp, -1, null);
         }
 
         public static ViewContext GetViewContextWithPath(string appPath, ViewDataDictionary viewData) {
@@ -163,29 +177,21 @@ namespace SimpleHoneypot.Tests {
             return mockContainer.Object;
         }
 
-        public static AuthorizationContext BuildAuthorizationContext(bool addFormValue) {
-            string fakeInputName = "Fake-Input-Name";
-            var request = new Mock<HttpRequestBase>();
-            request.Setup(r => r.HttpMethod).Returns("POST");
-            request.Setup(r => r.Headers).Returns(new NameValueCollection());
-            request.Setup(r => r.Form).Returns(new NameValueCollection());
-            request.Setup(r => r.QueryString).Returns(new NameValueCollection());
-            request.Setup(r => r.Files).Returns(new Mock<HttpFileCollectionBase>().Object);
-
-            var mockHttpContext = new Mock<HttpContextBase>();
-            mockHttpContext.Expect(c => c.Request).Returns(request.Object);
-            mockHttpContext.Setup(c => c.Session).Returns((HttpSessionStateBase)null);
-            if (addFormValue) {
-                var form = new NameValueCollection { { fakeInputName, "I Am A Spam Bot!" } };
-                mockHttpContext.Setup(c => c.Request.Form).Returns(form);
-            }
-
-            var controllerContext = new ControllerContext(mockHttpContext.Object, new RouteData(), new Mock<ControllerBase>().Object);
+        public static AuthorizationContext GetAuthorizationContext(NameValueCollection form) {
+            return new AuthorizationContext(GetControllerContext(form));
+        }
+        public static AuthorizationContext GetAuthorizationContext() {
+            return new AuthorizationContext(GetControllerContext());
+        }
+        public static ControllerContext GetControllerContext() {
+            return GetControllerContext(null);
+        }
+        public static ControllerContext GetControllerContext(NameValueCollection form) {
+            var mockHttpContext = GetHttpContext(form);
+            var controllerContext = new ControllerContext(mockHttpContext, new RouteData(), new Mock<ControllerBase>().Object);
             controllerContext.Controller.TempData = new TempDataDictionary();
-            controllerContext.Controller.TempData.Add(Honeypot.TempDataKey, "Fake-Input-Name");
-
-
-            return new AuthorizationContext(controllerContext);
+            controllerContext.Controller.TempData.Add(Honeypot.TempDataKey, FakeInputName);
+            return controllerContext;
         }
     }
 }
