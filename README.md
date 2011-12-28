@@ -1,6 +1,6 @@
 #What is a honeypot?#
 
-*From wikipedia* in computer terminology, a honeypot is a trap set to detect, deflect, or in some manner counteract attempts at unauthorized use of information systems. Generally it consists of a computer, data, or a network site that appears to be part of a network, but is actually isolated and monitored, and which seems to contain information or a resource of value to attackers.
+*From wikipedia*: in computer terminology, a honeypot is a trap set to detect, deflect, or in some manner counteract attempts at unauthorized use of information systems. Generally it consists of a computer, data, or a network site that appears to be part of a network, but is actually isolated and monitored, and which seems to contain information or a resource of value to attackers. Simple Honeypot is a honeypot solution for ASP.NET MVC2+.
 
 ##Simple honeypot is, _simple_ ##
 
@@ -17,7 +17,7 @@ Install package from nuget: **Install-Package SimpleHoneypot.MVC**
 - App_Start directory
 - App_Start/SimpleHoneypot.cs
  
-###Default configuration of SimpleHoneypot.cs### 
+###Default configuration of SimpleHoneypot.cs###
 
 	public static void Start() {
 				RegisterHoneypotInputNames(Honeypot.InputNames);
@@ -58,6 +58,7 @@ You will need to annotate the Action of your controller with the `[Honeypot]` Fi
 		return RedirectToAction("Index");
 	}
 
+The HoneypotAttribute optionally takes a url to redirect to as a String `[Honeypot("/Home/Honeytrap")]`
 
 ###The View###
 

@@ -8,6 +8,10 @@ namespace $rootnamespace$.App_Start {
     public static class SimpleHoneypot {
         public static void Start() {
             RegisterHoneypotInputNames(Honeypot.InputNames);
+            //Optional, configure the css class name for the honeypot input (default: input-imp-long)
+            //Regardless, the class should be in your stylesheet with display: none
+
+            //Honeypot.SetCssClassName("NewCssClassName");
         }
 		
 		public static void RegisterHoneypotInputNames(HoneypotInputNameCollection collection) {
@@ -29,6 +33,10 @@ namespace $rootnamespace$.App_Start {
                                "Pet",
                                "Reason"
                            });
+            //This is optional, if you don't want the honeypot input to generate a random input name per request
+            //You can skip adding any items to the collection and set a DefaultInputName (default: Phone-Data-Home)
+
+            //Honeypot.SetDefaultInputName("NewDefaultInputName");
         }
     }
 }
