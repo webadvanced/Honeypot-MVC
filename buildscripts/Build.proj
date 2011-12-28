@@ -6,20 +6,16 @@
 		<OutputDir>$(BuildDir)\$(Configuration)</OutputDir>
 		<PackageDir>$(BuildDir)\Packages</PackageDir>
 		<SolutionFile>$(BaseDir)\SimpleHoneypot.sln</SolutionFile>
-		<TestAssemblies>
-			$(BaseDir)\src\SimpleHoneypot.Tests\bin\$(Configuration)\SimpleHoneypot.Tests.dll;
-		</TestAssemblies>
-		
 		<MSBuildExtensions>$(BaseDir)\lib\msbuild\msbuild.community.tasks.dll</MSBuildExtensions>
 	</PropertyGroup>
 	<UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.Zip" />
 	<UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
 	<UsingTask AssemblyFile="$(BaseDir)\lib\xunit\lib\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
 	
-	<Target Name="default" DependsOnTargets="Compile; Deploy; Package" />
+	<Target Name="default" DependsOnTargets="Compile; Test; Deploy; Package" />
 	
 	<Target Name="Test">
-		<xunit Assemblies="$(TestAssemblies)"  />
+		<xunit Assembly="$(BaseDir)\src\SimpleHoneypot.Tests\bin\$(Configuration)\SimpleHoneypot.Tests.dll"  />
 	</Target>
 	
 	<Target Name="Compile">
