@@ -8,13 +8,13 @@ namespace SimpleHoneypot.Core {
             InputNames = new HoneypotInputNameCollection();
             CssClassName = "input-imp-long";
             DefaultInputName = "Phone-Data-Home";
-            AutomaticallyHandleBots = true;
+            ManuallyHandleBots = false;
         }
 
         public static HoneypotInputNameCollection InputNames { get; private set; }
         public static string CssClassName { get; private set; }
         public static string DefaultInputName { get; private set; }
-        public static bool AutomaticallyHandleBots { get; private set; }
+        public static bool ManuallyHandleBots { get; private set; }
 
         public static void SetCssClassName(string cssClassName) {
             Check.Argument.IsNotNullOrEmpty(cssClassName, "cssClassName");
@@ -26,8 +26,8 @@ namespace SimpleHoneypot.Core {
             DefaultInputName = inputName;
         }
 
-        public static void SetAutomaticallyHandleBots(bool b) {
-            AutomaticallyHandleBots = b;
+        public static void SetManuallyHandleBots(bool b) {
+            ManuallyHandleBots = b;
         }
     }
 }

@@ -37,14 +37,9 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void AutomaticallyHandleBots_ShouldBeTrueByDefault() {
-            Assert.True(Honeypot.AutomaticallyHandleBots);
-        }
-
-        [Fact]
         public void SetAutomaticallyHandleBots_ShouldSetAutomaticallyHandleBots_ToPassedBool() {
-            Honeypot.SetAutomaticallyHandleBots(false);
-            Assert.False(Honeypot.AutomaticallyHandleBots);
+            Honeypot.SetManuallyHandleBots(true);
+            Assert.True(Honeypot.ManuallyHandleBots);
         }
     }
 }

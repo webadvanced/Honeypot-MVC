@@ -28,7 +28,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldReturn_WhenHoneypotKeyIsNotInTempData() {
-            Honeypot.SetAutomaticallyHandleBots(true);
+            Honeypot.SetManuallyHandleBots(false);
             var filterContext = MvcHelper.GetAuthorizationContext();
             var attribue = new HoneypotAttribute();
 
@@ -39,7 +39,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldRedirectToRootByDefault_WhenTempDataKeyHasValue() {
-            Honeypot.SetAutomaticallyHandleBots(true);
+            Honeypot.SetManuallyHandleBots(false);
             var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute();
 
@@ -51,8 +51,8 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void OnAuthorization_ShouldReturn_WhenTempDataKeyHasValueAndAutomaticallyHandleBotsIsFalse() {
-            Honeypot.SetAutomaticallyHandleBots(false);
+        public void OnAuthorization_ShouldReturn_WhenTempDataKeyHasValueAndManuallyHandleBotsIsTrue() {
+            Honeypot.SetManuallyHandleBots(true);
             var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute();
 
@@ -63,7 +63,7 @@ namespace SimpleHoneypot.Tests {
 
         [Fact]
         public void OnAuthorization_ShouldRedirectToProvidedUrl_WhenTempDataKeyHasValue() {
-            Honeypot.SetAutomaticallyHandleBots(true);
+            Honeypot.SetManuallyHandleBots(false);
             var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute("/Handle/Bot");
 

@@ -41,7 +41,7 @@ namespace SimpleHoneypot.Web.Tests {
                                "Pet",
                                "Reason"
                            });
-            Honeypot.SetAutomaticallyHandleBots(false);
+            Honeypot.SetManuallyHandleBots(false);
         }
 
         protected void Application_Start() {
