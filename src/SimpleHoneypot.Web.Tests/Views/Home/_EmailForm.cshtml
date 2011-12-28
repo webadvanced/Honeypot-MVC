@@ -1,10 +1,25 @@
 ﻿@using SimpleHoneypot.HtmlHelpers
 @model SimpleHoneypot.Web.Tests.Models.EmailSubscriber
 
-@using(Html.BeginForm("Subscribe", "Home")) {
+<select id="post-action">
+    <option value="/Home/Subscribe">Subscribe</option>
+    <option value="/Home/SubscribeManual">Subscribe Manual</option>
+</select>
+
+@using(Html.BeginForm("Subscribe", "Home", FormMethod.Post, new {id = "s-form"})) {
     @Html.EditorForModel()
     @Html.HoneypotInput()
     <p>
         <input type="submit" value="Subscribe" />
     </p>
 }
+
+<script type="text/javascript">
+    (function (d) {
+        var ddl = d.getElementById('post-action');
+        var form = d.getElementById('s-form');
+        ddl.onchange = function () {
+            form.setAttribute('action', this.value);
+        };
+    } (document));
+</script>

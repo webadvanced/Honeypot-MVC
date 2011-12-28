@@ -6,11 +6,12 @@ using SimpleHoneypot.Core.Common.Thermador.Core.Common;
 namespace SimpleHoneypot.Extensions {
     public static class HttpContextBaseExtensions {
 
-        public static bool ValidateHoneypot(this HttpContextBase context) {
-            Check.Argument.IsNotNull(context, "context");
-            if (context.Items[Honeypot.HttpContextKey] == null)
+        public static bool ValidateHoneypot(this HttpRequestBase request) {
+            Check.Argument.IsNotNull(request, "context");
+
+            if (HttpContext.Current.Items[Honeypot.HttpContextKey] == null)
                 throw new NullReferenceException("HttpContext.Items must have entry for Honeypot.HttpContextKey. Ensure your action has HoneypotAttribute");
-            return  (bool)context.Items[Honeypot.HttpContextKey];
+            return (bool)HttpContext.Current.Items[Honeypot.HttpContextKey];
             
         }
     }

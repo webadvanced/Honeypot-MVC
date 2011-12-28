@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using SimpleHoneypot.Extensions;
 using SimpleHoneypot.Web.Tests.Models;
 using SimpleHoneypot.ActionFilters;
 
@@ -17,6 +18,14 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
         public ActionResult Subscribe(EmailSubscriber subscriber) {
              
             return RedirectToAction("Index");            
+        }
+
+        [Honeypot]
+        public ActionResult SubscribeManual(EmailSubscriber subscriber) {
+            if (Request.ValidateHoneypot())
+                return RedirectToAction("About");
+            
+            return RedirectToAction("Index");
         }
 
     }
