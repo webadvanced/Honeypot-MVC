@@ -20,7 +20,7 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
             return RedirectToAction("Index");            
         }
 
-        [Honeypot]
+        [Honeypot(true)]
         public ActionResult SubscribeManual(EmailSubscriber subscriber) {
             if (Request.ValidateHoneypot())
                 return RedirectToAction("About");

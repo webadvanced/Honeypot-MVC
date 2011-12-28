@@ -51,10 +51,20 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void OnAuthorization_ShouldReturn_WhenTempDataKeyHasValueAndManuallyHandleBotsIsTrue() {
+        public void OnAuthorization_ShouldReturn_WhenTempDataKeyHasValueAndManuallyHandleBotsIsTrueGlobally() {
             Honeypot.SetManuallyHandleBots(true);
             var filterContext = MvcHelper.GetAuthorizationContext(_from);
             var attribue = new HoneypotAttribute();
+
+            attribue.OnAuthorization(filterContext);
+
+            Assert.Null(filterContext.Result);
+        }
+
+        [Fact]
+        public void OnAuthorization_ShouldReturn_WhenTempDataKeyHasValueAndManuallyHandleBotsIsTrueOnAttribute() {
+            var filterContext = MvcHelper.GetAuthorizationContext(_from);
+            var attribue = new HoneypotAttribute(true);
 
             attribue.OnAuthorization(filterContext);
 
