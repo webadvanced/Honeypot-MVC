@@ -1,9 +1,9 @@
-﻿using System;
-using System.Web;
+﻿using SimpleHoneypot.Core.Common.Thermador.Core.Common;
 
 namespace SimpleHoneypot.Core {
     public static class Honeypot {
         public static readonly string TempDataKey = "Honeypot:Key";
+        public static readonly string HttpContextKey = "Honeypot:IsBot";
         static Honeypot() {
             InputNames = new HoneypotInputNameCollection();
             CssClassName = "input-imp-long";
@@ -17,14 +17,12 @@ namespace SimpleHoneypot.Core {
         public static bool AutomaticallyHandleBots { get; private set; }
 
         public static void SetCssClassName(string cssClassName) {
-            if (string.IsNullOrEmpty(cssClassName))
-                throw new ArgumentException("cssClassName cannot be null or empty", "cssClassName");
+            Check.Argument.IsNotNullOrEmpty(cssClassName, "cssClassName");
             CssClassName = cssClassName;
         }
 
         public static void SeDefaultInputName(string inputName) {
-            if (string.IsNullOrEmpty(inputName))
-                throw new ArgumentException("inputName cannot be null or empty", "inputName");
+            Check.Argument.IsNotNullOrEmpty(inputName, "inputName");
             DefaultInputName = inputName;
         }
 

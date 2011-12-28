@@ -43,12 +43,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\HoneypotAttribute.cs" />
+    <Compile Include="Core\Common\Check.cs" />
+    <Compile Include="Core\GlobalText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalText.resx</DependentUpon>
+    </Compile>
     <Compile Include="Core\Honeypot.cs" />
     <Compile Include="Core\HoneypotInputNameCollection.cs" />
+    <Compile Include="Core\Services\HoneypotService.cs" />
+    <Compile Include="Core\Services\IHoneypotService.cs" />
+    <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
     <Compile Include="HtmlHelpers\HoneypotHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Core\GlobalText.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

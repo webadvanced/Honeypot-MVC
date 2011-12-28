@@ -53,6 +53,7 @@
     <Compile Include="HoneypotAttributeTests.cs" />
     <Compile Include="HoneypotHelperTests.cs" />
     <Compile Include="HoneypotInputNameCollectionTests.cs" />
+    <Compile Include="HoneypotServiceTests.cs" />
     <Compile Include="HoneypotTests.cs" />
     <Compile Include="MvcHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
