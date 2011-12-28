@@ -178,10 +178,10 @@ namespace SimpleHoneypot.Tests {
         }
 
         public static AuthorizationContext GetAuthorizationContext(NameValueCollection form) {
-            return new AuthorizationContext(GetControllerContext(form));
+            return new AuthorizationContext(GetControllerContext(form), new Mock<ActionDescriptor>().Object);
         }
         public static AuthorizationContext GetAuthorizationContext() {
-            return new AuthorizationContext(GetControllerContext());
+            return new AuthorizationContext(GetControllerContext(), new Mock<ActionDescriptor>().Object);
         }
         public static ControllerContext GetControllerContext() {
             return GetControllerContext(null);
