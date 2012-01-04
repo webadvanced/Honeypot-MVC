@@ -29,6 +29,7 @@
 		
 		<ItemGroup>
 			<MainBinaries Include="$(BaseDir)\src\SimpleHoneypot\bin\$(Configuration)\**\*.*" />
+			<MainBinariesNET4MVC2 Include="$(BaseDir)\src\SimpleHoneypot.NET4.MVC2\bin\$(Configuration)\**\*.*" />
 			<AppStart Include="$(BaseDir)\buildscripts\App_start\**\*.*" />
 		</ItemGroup>
 
@@ -50,11 +51,11 @@
 
 		<!-- Copy the source files to the package dir -->
 		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
-		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net20\%(RecursiveDir)" />
+		<Copy SourceFiles="@(MainBinariesNET4MVC2)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
 		<Copy SourceFiles="@(AppStart)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\content\App_Start\%(RecursiveDir)" />
     
 		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
-		<GetAssemblyIdentity AssemblyFiles="$(OutputDir)\SimpleHoneypot\SimpleHoneypot.dll">
+		<GetAssemblyIdentity AssemblyFiles="$(OutputDir)\SimpleHoneypot\SimpleHoneypot.NET4.MVC3.dll">
 			<Output TaskParameter="Assemblies" ItemName="AsmInfo" />
 		</GetAssemblyIdentity>
 

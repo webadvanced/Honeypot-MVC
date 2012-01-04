@@ -144,9 +144,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleHoneypot\SimpleHoneypot.csproj">
+    <ProjectReference Include="..\SimpleHoneypot\SimpleHoneypot.NET4.MVC3.csproj">
       <Project>{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}</Project>
-      <Name>SimpleHoneypot</Name>
+      <Name>SimpleHoneypot.NET4.MVC3</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

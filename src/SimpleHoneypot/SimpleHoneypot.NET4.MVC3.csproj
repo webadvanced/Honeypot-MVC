@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}</ProjectGuid>
+    <ProjectGuid>{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleHoneypot.Tests</RootNamespace>
-    <AssemblyName>SimpleHoneypot.Tests</AssemblyName>
+    <RootNamespace>SimpleHoneypot</RootNamespace>
+    <AssemblyName>SimpleHoneypot.NET4.MVC3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,38 +31,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\moq\lib\NET40\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit, Version=1.8.0.1549, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\xunit\lib\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HoneypotAttributeTests.cs" />
-    <Compile Include="HoneypotHelperTests.cs" />
-    <Compile Include="HoneypotInputNameCollectionTests.cs" />
-    <Compile Include="HoneypotServiceTests.cs" />
-    <Compile Include="HoneypotTests.cs" />
-    <Compile Include="MvcHelper.cs" />
+    <Compile Include="ActionFilters\HoneypotAttribute.cs" />
+    <Compile Include="Core\Common\Check.cs" />
+    <Compile Include="Core\GlobalText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Honeypot.cs" />
+    <Compile Include="Core\HoneypotInputNameCollection.cs" />
+    <Compile Include="Core\Services\HoneypotService.cs" />
+    <Compile Include="Core\Services\IHoneypotService.cs" />
+    <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
+    <Compile Include="HtmlHelpers\HoneypotHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleHoneypot\SimpleHoneypot.NET4.MVC3.csproj">
-      <Project>{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}</Project>
-      <Name>SimpleHoneypot.NET4.MVC3</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Core\GlobalText.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

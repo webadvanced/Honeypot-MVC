@@ -14,7 +14,7 @@
 
                 [DebuggerStepThrough]
                 public static void IsNotNullOrEmpty(string parameter, string parameterName) {
-                    if (string.IsNullOrWhiteSpace(parameter)) {
+                    if (string.IsNullOrEmpty(parameter)) {
                         throw new ArgumentException(String.Format(GlobalText.ArgumentCannotBeNullOrEmpty, parameterName), parameterName);
                     }
                 }

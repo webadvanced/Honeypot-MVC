@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58FEC57A-EB7D-4681-A024-68FF8A9AE54A}</ProjectGuid>
+    <ProjectGuid>{FEC824EF-381B-42C0-B704-AFFAA6D4DAF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleHoneypot.Tests</RootNamespace>
-    <AssemblyName>SimpleHoneypot.Tests</AssemblyName>
+    <RootNamespace>SimpleHoneypot</RootNamespace>
+    <AssemblyName>SimpleHoneypot.NET4.MVC2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,38 +31,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\moq\lib\NET40\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit, Version=1.8.0.1549, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\xunit\lib\xunit.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HoneypotAttributeTests.cs" />
-    <Compile Include="HoneypotHelperTests.cs" />
-    <Compile Include="HoneypotInputNameCollectionTests.cs" />
-    <Compile Include="HoneypotServiceTests.cs" />
-    <Compile Include="HoneypotTests.cs" />
-    <Compile Include="MvcHelper.cs" />
+    <Compile Include="..\simplehoneypot\actionfilters\HoneypotAttribute.cs">
+      <Link>ActionFilters\HoneypotAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\common\Check.cs">
+      <Link>Core\Common\Check.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\GlobalText.Designer.cs">
+      <Link>Core\GlobalText.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\Honeypot.cs">
+      <Link>Core\Honeypot.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\HoneypotInputNameCollection.cs">
+      <Link>Core\HoneypotInputNameCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\services\HoneypotService.cs">
+      <Link>Core\Services\HoneypotService.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\core\services\IHoneypotService.cs">
+      <Link>Core\Services\IHoneypotService.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\extensions\HttpRequestBaseExtensions.cs">
+      <Link>Extensions\HttpRequestBaseExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\simplehoneypot\htmlhelpers\HoneypotHelper.cs">
+      <Link>HtmlHelpers\HoneypotHelper.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleHoneypot\SimpleHoneypot.NET4.MVC3.csproj">
-      <Project>{3E27554A-AF9A-4979-92AC-1C1B0B4BD225}</Project>
-      <Name>SimpleHoneypot.NET4.MVC3</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="..\simplehoneypot\core\GlobalText.resx">
+      <Link>Core\GlobalText.resx</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

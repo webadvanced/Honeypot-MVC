@@ -11,7 +11,7 @@
     <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</summary>
     <language>en-US</language>
 	<dependencies>
-      <dependency id="WebActivator" version="1.4.2" />
+      <dependency id="WebActivator" version="1.5" />
     </dependencies>
   </metadata>
   <files>

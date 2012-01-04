@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using SimpleHoneypot.Core;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.App_Start.SimpleHoneypot), "Start")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof($rootnamespace$.App_Start.SimpleHoneypot), "Start")]
 
 namespace $rootnamespace$.App_Start {
     public static class SimpleHoneypot {
