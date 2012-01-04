@@ -22,7 +22,7 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
 
         [Honeypot(true)]
         public ActionResult SubscribeManual(EmailSubscriber subscriber) {
-            //Handel request if the Honeypot Faild
+            //Handle request if the Honeypot Faild
             if (Request.HoneypotFaild())
                 return RedirectToAction("About");
             
