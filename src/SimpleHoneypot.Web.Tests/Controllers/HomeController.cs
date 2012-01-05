@@ -25,7 +25,7 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
             //Handle request if the Honeypot Faild
             if (Request.HoneypotFaild())
                 return RedirectToAction("About");
-            
+
             return RedirectToAction("Index");
         }
 
