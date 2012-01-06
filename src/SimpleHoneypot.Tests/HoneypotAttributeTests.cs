@@ -11,7 +11,7 @@ namespace SimpleHoneypot.Tests {
 
         private NameValueCollection _from = new NameValueCollection { { MvcHelper.FakeInputName, "I Am a Bot" } };
 
-    [Fact]
+        [Fact]
         public void OnAuthorization_ShouldThrowArgumentNullException_WhenFilterContextIsNull() {
             var attribue = new HoneypotAttribute();
 
