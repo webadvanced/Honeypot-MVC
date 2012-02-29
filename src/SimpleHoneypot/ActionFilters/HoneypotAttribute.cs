@@ -33,12 +33,12 @@ namespace SimpleHoneypot.ActionFilters {
 
         public void OnAuthorization(AuthorizationContext filterContext) {
             Check.Argument.IsNotNull(filterContext, "filterContext");
-
-            if (filterContext.Controller.TempData[Honeypot.TempDataKey] == null)
-                throw new InvalidOperationException("HoneypotInput must be in the form collection");
-
-            string key = filterContext.Controller.TempData[Honeypot.TempDataKey].ToString();
-            bool isBot = _honeypotService.IsBot(filterContext.HttpContext.Request.Form, key);
+            bool isBot = filterContext.Controller.TempData[Honeypot.TempDataKey] == null;
+            if(!isBot) {
+                string key = filterContext.Controller.TempData[Honeypot.TempDataKey].ToString();
+                isBot = _honeypotService.IsBot(filterContext.HttpContext.Request.Form, key);    
+            }
+            
             filterContext.HttpContext.Items.Add(Honeypot.HttpContextKey, isBot);
             
             //Return if the request is not a bot or action is going to be manually handeled

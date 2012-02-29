@@ -19,11 +19,15 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void OnAuthorization_ShouldThrowInvalidOperactoinException_WhenTempDataDoesNotContainHoneypotKey() {
+        public void OnAuthorization_isBotShoultBeTrue_WhenTempDataDoesNotContainHoneypotKey() {
             AuthorizationContext filterContext = new Mock<AuthorizationContext> {DefaultValue = DefaultValue.Mock}.Object;
-            var attribue = new HoneypotAttribute();
+            Honeypot.SetManuallyHandleBots(false);
+            var attribue = new HoneypotAttribute("/Handle/Bot");
 
-            Assert.Throws<InvalidOperationException>(() => attribue.OnAuthorization(filterContext));
+            attribue.OnAuthorization(filterContext);
+
+            Assert.Equal("RedirectResult", filterContext.Result.GetType().Name);
+            var result = (RedirectResult)filterContext.Result;
         }
 
         [Fact]
