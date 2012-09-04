@@ -4,6 +4,7 @@ namespace SimpleHoneypot.Core {
     public static class Honeypot {
         public static readonly string TempDataKey = "Honeypot:Key";
         public static readonly string HttpContextKey = "Honeypot:IsBot";
+
         static Honeypot() {
             InputNames = new HoneypotInputNameCollection();
             CssClassName = "input-imp-long";

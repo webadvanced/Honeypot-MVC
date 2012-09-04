@@ -16,6 +16,7 @@
   </metadata>
   <files>
     <file src="lib\content\**\*.pp" target="content" />
+	<file src="lib\content\**\*.txt" target="content" />
 	<file src="lib\**\SimpleHoneypot.NET4.MVC2.dll" target="lib" />
 	<file src="lib\**\SimpleHoneypot.NET4.MVC3.dll" target="lib" />
   </files>

@@ -16,6 +16,7 @@
   </metadata>
   <files>
     <file src="lib\content\**\*.pp" target="content" />
+	<file src="lib\content\**\*.txt" target="content" />
 	<file src="lib\**\*MVC4.dll" target="lib" />
   </files>
 </package>

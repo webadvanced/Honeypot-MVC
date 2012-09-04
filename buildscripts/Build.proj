@@ -32,6 +32,7 @@
 			<MainBinariesNET4MVC2 Include="$(BaseDir)\src\SimpleHoneypot.NET4.MVC2\bin\$(Configuration)\**\*.*" />
 			<MainBinariesNET45MVC4 Include="$(BaseDir)\src\SimpleHoneypot.MVC4\bin\$(Configuration)\**\*.*" />
 			<AppStart Include="$(BaseDir)\buildscripts\App_start\**\*.*" />
+			<AppReadme Include="$(BaseDir)\buildscripts\App_Readme\**\*.*" />
 		</ItemGroup>
 
 		<!-- Copy to the output directory -->
@@ -56,6 +57,7 @@
 		<Copy SourceFiles="@(MainBinariesNET4MVC2)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
 		<Copy SourceFiles="@(MainBinariesNET45MVC4)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net45\%(RecursiveDir)" />
 		<Copy SourceFiles="@(AppStart)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\content\App_Start\%(RecursiveDir)" />
+		<Copy SourceFiles="@(AppReadme)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\content\App_Readme\%(RecursiveDir)" />
     
 		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
 		<GetAssemblyIdentity AssemblyFiles="$(OutputDir)\SimpleHoneypot\SimpleHoneypot.NET4.MVC3.dll">
