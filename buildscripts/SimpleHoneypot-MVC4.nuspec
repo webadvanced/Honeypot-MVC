@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>SimpleHoneypot.MVC</id>
+    <id>SimpleHoneypot.MVC4</id>
     <version></version>
     <authors>Web Advanced</authors>
     <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
     <iconUrl>http://clients.wadev.com/hp_nuget/honeypot.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</description>
-    <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC2+.</summary>
+    <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC4.</description>
+    <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC4.</summary>
     <language>en-US</language>
 	<dependencies>
       <dependency id="WebActivator" version="1.5" />
@@ -16,7 +16,6 @@
   </metadata>
   <files>
     <file src="lib\content\**\*.pp" target="content" />
-	<file src="lib\**\SimpleHoneypot.NET4.MVC2.dll" target="lib" />
-	<file src="lib\**\SimpleHoneypot.NET4.MVC3.dll" target="lib" />
+	<file src="lib\**\*MVC4.dll" target="lib" />
   </files>
 </package>

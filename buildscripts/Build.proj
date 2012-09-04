@@ -30,6 +30,7 @@
 		<ItemGroup>
 			<MainBinaries Include="$(BaseDir)\src\SimpleHoneypot\bin\$(Configuration)\**\*.*" />
 			<MainBinariesNET4MVC2 Include="$(BaseDir)\src\SimpleHoneypot.NET4.MVC2\bin\$(Configuration)\**\*.*" />
+			<MainBinariesNET45MVC4 Include="$(BaseDir)\src\SimpleHoneypot.MVC4\bin\$(Configuration)\**\*.*" />
 			<AppStart Include="$(BaseDir)\buildscripts\App_start\**\*.*" />
 		</ItemGroup>
 
@@ -48,10 +49,12 @@
 		
 		<!-- First copy the nuspec template files to the package dir -->
 		<Copy SourceFiles="$(MSBuildProjectDirectory)\SimpleHoneypot.nuspec" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot" />
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\SimpleHoneypot-MVC4.nuspec" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot" />
 
 		<!-- Copy the source files to the package dir -->
 		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
 		<Copy SourceFiles="@(MainBinariesNET4MVC2)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net40\%(RecursiveDir)" />
+		<Copy SourceFiles="@(MainBinariesNET45MVC4)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\Net45\%(RecursiveDir)" />
 		<Copy SourceFiles="@(AppStart)" DestinationFolder="$(PackageDir)\temp\SimpleHoneypot\lib\content\App_Start\%(RecursiveDir)" />
     
 		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
@@ -65,9 +68,17 @@
 			XmlFileName="$(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot.nuspec"
 			XPath="/package/metadata/version"
 			Value="%(AsmInfo.Version)" />
+	    
+		<XmlUpdate
+		  Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+			XmlFileName="$(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot-MVC4.nuspec"
+			XPath="/package/metadata/version"
+			Value="%(AsmInfo.Version)" />
 
 		<Exec WorkingDirectory='$(BuildDir)\Packages' 
 			  Command='"$(BaseDir)\lib\nuget\nuget .exe" pack $(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot.nuspec' />
+	    <Exec WorkingDirectory='$(BuildDir)\Packages' 
+			  Command='"$(BaseDir)\lib\nuget\nuget .exe" pack $(PackageDir)\temp\SimpleHoneypot\SimpleHoneypot-MVC4.nuspec' />
 		
 		<RemoveDir Directories="$(PackageDir)\temp" />
 	</Target>
