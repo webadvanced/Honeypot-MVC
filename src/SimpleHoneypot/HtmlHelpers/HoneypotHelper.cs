@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace SimpleHoneypot.HtmlHelpers {
     public static class HoneypotHelper {
 
-        private static Random _random = new Random();
+        private static readonly Random Random = new Random();
 
         public static MvcHtmlString HoneypotInput(this HtmlHelper helper) {
             string inputName;
@@ -27,7 +27,7 @@ namespace SimpleHoneypot.HtmlHelpers {
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) {
             T[] elements = source.ToArray();
             for (int i = elements.Length - 1; i > 0; i--) {
-                int swapIndex = _random.Next(i + 1);
+                int swapIndex = Random.Next(i + 1);
                 yield return elements[swapIndex];
                 elements[swapIndex] = elements[i];
             }
