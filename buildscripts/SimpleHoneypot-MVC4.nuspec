@@ -4,6 +4,7 @@
     <id>SimpleHoneypot.MVC4</id>
     <version></version>
     <authors>Web Advanced</authors>
+	<licenseUrl>https://github.com/webadvanced/Honeypot-MVC/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
     <iconUrl>http://clients.wadev.com/hp_nuget/honeypot.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
