@@ -20,4 +20,3 @@ msbuild.log
 PublishProfiles/
 *.psess
 *.ncrunchsolution
-*.ps1
