@@ -53,6 +53,7 @@ namespace SimpleHoneypot.HtmlHelpers {
                 yield return elements[swapIndex];
                 elements[swapIndex] = elements[i];
             }
+
             yield return elements[0];
         }
 
