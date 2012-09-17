@@ -3,10 +3,12 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using SimpleHoneypot.Core;
+using System.Collections.Generic;
 
 namespace SimpleHoneypot.HtmlHelpers {
     public static class HoneypotHelper {
-        
+
+        private static Random _random = new Random();
 
         public static MvcHtmlString HoneypotInput(this HtmlHelper helper) {
             string inputName;
@@ -14,12 +16,22 @@ namespace SimpleHoneypot.HtmlHelpers {
                 inputName = Honeypot.DefaultInputName;
             }
             else {
-                var random = new Random(Honeypot.InputNames.Count);
-                string[] keys = Honeypot.InputNames.OrderBy(x => random.Next()).Take(2).ToArray();
+                
+                string[] keys = Honeypot.InputNames.Shuffle().Take(2).ToArray();
                 inputName = String.Format("{0}-{1}", keys[0], keys[1]);
             }
             helper.ViewContext.Controller.TempData[Honeypot.TempDataKey] = inputName;
             return helper.TextBox(inputName, string.Empty, new {@class = Honeypot.CssClassName});
+        }
+
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) {
+            T[] elements = source.ToArray();
+            for (int i = elements.Length - 1; i > 0; i--) {
+                int swapIndex = _random.Next(i + 1);
+                yield return elements[swapIndex];
+                elements[swapIndex] = elements[i];
+            }
+            yield return elements[0];
         }
     }
 }
