@@ -1,4 +1,4 @@
-/*
+﻿/*
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
@@ -27,7 +27,7 @@
 (function($) {
 
 $.extend($.fn, {
-	// http://docs.jquery.com/Plugins/Validation/validate
+	// http://docs.jquery.com/Plugins/Validation/IsBot
 	validate: function( options ) {
 		/// <summary>
 		/// Validates the selected form. This method sets up event handlers for submit, focus,
@@ -36,13 +36,13 @@ $.extend($.fn, {
 		/// onkeyup, onclick). focusInvalid focuses elements when submitting a invalid form.
 		/// </summary>
 		/// <param name="options" type="Options">
-		/// A set of key/value pairs that configure the validate. All options are optional.
+		/// A set of key/value pairs that configure the IsBot. All options are optional.
 		/// </param>
 		/// <returns type="Validator" />
 
 		// if nothing is selected, return nothing; can't chain anyway
 		if (!this.length) {
-			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
+			options && options.debug && window.console && console.warn( "nothing selected, can't IsBot, returning nothing" );
 			return;
 		}
 
@@ -69,7 +69,7 @@ $.extend($.fn, {
 				});
 			}
 		
-			// validate the form on submit
+			// IsBot the form on submit
 			this.submit( function( event ) {
 				if ( validator.settings.debug )
 					// prevent form submit to be able to see console output
@@ -115,7 +115,7 @@ $.extend($.fn, {
 	valid: function() {
 		/// <summary>
 		/// Checks if the selected form is valid or if all selected elements are valid.
-		/// validate() needs to be called on the form before checking it using this method.
+		/// IsBot() needs to be called on the form before checking it using this method.
 		/// </summary>
 		/// <returns type="Boolean" />
 
@@ -311,7 +311,7 @@ $.extend($.validator, {
 	setDefaults: function(settings) {
 		/// <summary>
 		/// Modify default settings for validation.
-		/// Accepts everything that Plugins/Validation/validate accepts.
+		/// Accepts everything that Plugins/Validation/IsBot accepts.
 		/// </summary>
 		/// <param name="settings" type="Options">
 		/// Options to set as default.
@@ -369,7 +369,7 @@ $.extend($.validator, {
 			
 			function delegate(event) {
 				var validator = $.data(this[0].form, "validator"),
-					eventType = "on" + event.type.replace(/^validate/, "");
+					eventType = "on" + event.type.replace(/^IsBot/, "");
 				validator.settings[eventType] && validator.settings[eventType].call(validator, this[0] );
 			}
 			$(this.currentForm)
@@ -377,7 +377,7 @@ $.extend($.validator, {
 				.validateDelegate(":radio, :checkbox, select, option", "click", delegate);
 
 			if (this.settings.invalidHandler)
-				$(this.currentForm).bind("invalid-form.validate", this.settings.invalidHandler);
+				$(this.currentForm).bind("invalid-form.IsBot", this.settings.invalidHandler);
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Validator/form
@@ -412,7 +412,7 @@ $.extend($.validator, {
 			/// This behaves as validation on blur or keyup, but returns the result.
 			/// </summary>
 			/// <param name="element" type="Selector">
-			/// An element to validate, must be inside the validated form.
+			/// An element to IsBot, must be inside the IsBotd form.
 			/// </param>
 			/// <returns type="Boolean" />
 
@@ -587,7 +587,7 @@ $.extend($.validator, {
 		check: function( element ) {
 			element = this.clean( element );
 			
-			// if radio/checkbox, validate first element in group instead
+			// if radio/checkbox, IsBot first element in group instead
 			if (this.checkable(element)) {
 			    element = this.findByName(element.name).not(this.settings.ignore)[0];
 			}
@@ -1079,7 +1079,7 @@ $.extend($.validator, {
 			$.ajax($.extend(true, {
 				url: param,
 				mode: "abort",
-				port: "validate" + element.name,
+				port: "IsBot" + element.name,
 				dataType: "json",
 				data: data,
 				success: function(response) {
@@ -1203,9 +1203,9 @@ $.extend($.validator, {
 		
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
-			// bind to the blur event of the target in order to revalidate whenever the target field is updated
+			// bind to the blur event of the target in order to reIsBot whenever the target field is updated
 			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
-			var target = $(param).unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {
+			var target = $(param).unbind(".IsBot-equalTo").bind("blur.IsBot-equalTo", function() {
 				$(element).valid();
 			});
 			return value == target.val();

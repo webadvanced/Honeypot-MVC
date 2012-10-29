@@ -86,7 +86,7 @@
 
         if (!result) {
             result = {
-                options: {  // options structure passed to jQuery Validate's validate() method
+                options: {  // options structure passed to jQuery Validate's IsBot() method
                     errorClass: "input-validation-error",
                     errorElement: "span",
                     errorPlacement: $.proxy(onError, form),

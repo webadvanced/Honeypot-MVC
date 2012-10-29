@@ -38,13 +38,16 @@
   <ItemGroup>
     <Compile Include="ActionFilters\HoneypotAttribute.cs" />
     <Compile Include="Core\Common\Check.cs" />
+    <Compile Include="Core\HoneypotDataSerializer.cs" />
     <Compile Include="Core\GlobalText.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalText.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\Honeypot.cs" />
+    <Compile Include="Core\HoneypotData.cs" />
     <Compile Include="Core\HoneypotInputNameCollection.cs" />
+    <Compile Include="Core\HoneypotWorker.cs" />
     <Compile Include="Core\Services\HoneypotService.cs" />
     <Compile Include="Core\Services\IHoneypotService.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />

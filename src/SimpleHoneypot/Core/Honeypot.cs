@@ -16,24 +16,26 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SimpleHoneypot.Core {
-    using SimpleHoneypot.Core.Common.Thermador.Core.Common;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using SimpleHoneypot.Core.Common;
 
     public static class Honeypot {
         #region Constants and Fields
 
-        public static readonly string HttpContextKey = "Honeypot:IsBot";
-
-        public static readonly string TempDataKey = "Honeypot:Key";
-
+        public static readonly HoneypotWorker Worker;
+        public const string HttpContextKey = "__hpIsBot";
         #endregion
 
         #region Constructors and Destructors
 
         static Honeypot() {
             InputNames = new HoneypotInputNameCollection();
-            CssClassName = "input-imp-long";
-            DefaultInputName = "Phone-Data-Home";
+            CssClassName = HoneypotData.DefaultCssClassName;
+            DefaultInputName = HoneypotData.DefaultFieldName;
             ManuallyHandleBots = false;
+            Worker = new HoneypotWorker();
         }
 
         #endregion
@@ -64,6 +66,14 @@ namespace SimpleHoneypot.Core {
 
         public static void SetManuallyHandleBots(bool b) {
             ManuallyHandleBots = b;
+        }
+
+        public static MvcHtmlString GetHtml(HtmlHelper helper) {
+            return Worker.GetHtml(helper, new HttpContextWrapper(HttpContext.Current));
+        }
+
+        public static bool IsBot() {
+            return Worker.IsBot(new HttpContextWrapper(HttpContext.Current));
         }
 
         #endregion

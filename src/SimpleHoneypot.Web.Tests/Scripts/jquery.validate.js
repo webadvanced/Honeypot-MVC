@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Note: While Microsoft is not the author of this file, Microsoft is
 * offering you a license subject to the terms of the Microsoft Software
 * License Terms for Microsoft ASP.NET Model View Controller 3.
@@ -17,12 +17,12 @@
 (function($) {
 
 $.extend($.fn, {
-	// http://docs.jquery.com/Plugins/Validation/validate
+	// http://docs.jquery.com/Plugins/Validation/IsBot
 	validate: function( options ) {
 
 		// if nothing is selected, return nothing; can't chain anyway
 		if (!this.length) {
-			options && options.debug && window.console && console.warn( "nothing selected, can't validate, returning nothing" );
+			options && options.debug && window.console && console.warn( "nothing selected, can't IsBot, returning nothing" );
 			return;
 		}
 
@@ -49,7 +49,7 @@ $.extend($.fn, {
 				});
 			}
 
-			// validate the form on submit
+			// IsBot the form on submit
 			this.submit( function( event ) {
 				if ( validator.settings.debug )
 					// prevent form submit to be able to see console output
@@ -302,7 +302,7 @@ $.extend($.validator, {
 
 			function delegate(event) {
 				var validator = $.data(this[0].form, "validator"),
-					eventType = "on" + event.type.replace(/^validate/, "");
+					eventType = "on" + event.type.replace(/^IsBot/, "");
 				validator.settings[eventType] && validator.settings[eventType].call(validator, this[0] );
 			}
 			$(this.currentForm)
@@ -310,7 +310,7 @@ $.extend($.validator, {
 				.validateDelegate(":radio, :checkbox, select, option", "click", delegate);
 
 			if (this.settings.invalidHandler)
-				$(this.currentForm).bind("invalid-form.validate", this.settings.invalidHandler);
+				$(this.currentForm).bind("invalid-form.IsBot", this.settings.invalidHandler);
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Validator/form
@@ -480,7 +480,7 @@ $.extend($.validator, {
 		check: function( element ) {
 			element = this.clean( element );
 
-			// if radio/checkbox, validate first element in group instead
+			// if radio/checkbox, IsBot first element in group instead
 			if (this.checkable(element)) {
 				element = this.findByName( element.name ).not(this.settings.ignore)[0];
 			}
@@ -942,7 +942,7 @@ $.extend($.validator, {
 			$.ajax($.extend(true, {
 				url: param,
 				mode: "abort",
-				port: "validate" + element.name,
+				port: "IsBot" + element.name,
 				dataType: "json",
 				data: data,
 				success: function(response) {
@@ -1066,9 +1066,9 @@ $.extend($.validator, {
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
-			// bind to the blur event of the target in order to revalidate whenever the target field is updated
+			// bind to the blur event of the target in order to reIsBot whenever the target field is updated
 			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
-			var target = $(param).unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {
+			var target = $(param).unbind(".IsBot-equalTo").bind("blur.IsBot-equalTo", function() {
 				$(element).valid();
 			});
 			return value == target.val();

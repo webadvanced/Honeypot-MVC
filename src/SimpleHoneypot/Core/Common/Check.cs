@@ -16,32 +16,30 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SimpleHoneypot.Core.Common {
-    namespace Thermador.Core.Common {
-        using System;
-        using System.Diagnostics;
+    using System;
+    using System.Diagnostics;
 
-        public static class Check {
-            public static class Argument {
-                #region Public Methods and Operators
+    public static class Check {
+        public static class Argument {
+            #region Public Methods and Operators
 
-                [DebuggerStepThrough]
-                public static void IsNotNull(object parameter, string parameterName) {
-                    if (parameter == null) {
-                        throw new ArgumentNullException(
-                            parameterName, String.Format(GlobalText.ArgumentCannotBeNull, parameterName));
-                    }
+            [DebuggerStepThrough]
+            public static void IsNotNull(object parameter, string parameterName) {
+                if (parameter == null) {
+                    throw new ArgumentNullException(
+                        parameterName, String.Format(GlobalText.ArgumentCannotBeNull, parameterName));
                 }
-
-                [DebuggerStepThrough]
-                public static void IsNotNullOrEmpty(string parameter, string parameterName) {
-                    if (string.IsNullOrEmpty(parameter)) {
-                        throw new ArgumentException(
-                            String.Format(GlobalText.ArgumentCannotBeNullOrEmpty, parameterName), parameterName);
-                    }
-                }
-
-                #endregion
             }
+
+            [DebuggerStepThrough]
+            public static void IsNotNullOrEmpty(string parameter, string parameterName) {
+                if (string.IsNullOrEmpty(parameter)) {
+                    throw new ArgumentException(
+                        String.Format(GlobalText.ArgumentCannotBeNullOrEmpty, parameterName), parameterName);
+                }
+            }
+
+            #endregion
         }
     }
 }

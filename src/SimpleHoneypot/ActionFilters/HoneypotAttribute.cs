@@ -20,16 +20,13 @@ namespace SimpleHoneypot.ActionFilters {
     using System.Web.Mvc;
 
     using SimpleHoneypot.Core;
-    using SimpleHoneypot.Core.Common.Thermador.Core.Common;
-    using SimpleHoneypot.Core.Services;
+    using SimpleHoneypot.Core.Common;
+    using SimpleHoneypot.Core.
+    Services;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class HoneypotAttribute : FilterAttribute, IAuthorizationFilter {
         #region Constants and Fields
-
-        private readonly IHoneypotService honeypotService;
-
-        private readonly bool manuallyHandleBots;
 
         private readonly string redirectUrl;
 
@@ -39,21 +36,15 @@ namespace SimpleHoneypot.ActionFilters {
 
         public HoneypotAttribute() {
             this.redirectUrl = "/";
-            this.honeypotService = new HoneypotService();
-            this.manuallyHandleBots = Honeypot.ManuallyHandleBots;
         }
 
         public HoneypotAttribute(bool manuallyHandleBots) {
             this.redirectUrl = "/";
-            this.honeypotService = new HoneypotService();
-            this.manuallyHandleBots = manuallyHandleBots;
         }
 
         public HoneypotAttribute(string redirectUrl) {
             Check.Argument.IsNotNullOrEmpty(redirectUrl, "redirectUrl");
             this.redirectUrl = redirectUrl;
-            this.honeypotService = new HoneypotService();
-            this.manuallyHandleBots = Honeypot.ManuallyHandleBots;
         }
 
         #endregion
@@ -62,16 +53,10 @@ namespace SimpleHoneypot.ActionFilters {
 
         public void OnAuthorization(AuthorizationContext filterContext) {
             Check.Argument.IsNotNull(filterContext, "filterContext");
-            bool isBot = filterContext.Controller.TempData[Honeypot.TempDataKey] == null;
-            if (!isBot) {
-                string key = filterContext.Controller.TempData[Honeypot.TempDataKey].ToString();
-                isBot = this.honeypotService.IsBot(filterContext.HttpContext.Request.Form, key);
-            }
 
-            filterContext.HttpContext.Items.Add(Honeypot.HttpContextKey, isBot);
+            bool isBot = Honeypot.IsBot();
 
-            //Return if the request is not a bot or action is going to be manually handeled
-            if (!isBot || this.manuallyHandleBots) {
+            if(!isBot || Honeypot.ManuallyHandleBots) {
                 return;
             }
 

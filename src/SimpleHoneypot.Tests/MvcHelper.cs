@@ -190,7 +190,7 @@ namespace SimpleHoneypot.Tests {
             var mockHttpContext = GetHttpContext(form);
             var controllerContext = new ControllerContext(mockHttpContext, new RouteData(), new Mock<ControllerBase>().Object);
             controllerContext.Controller.TempData = new TempDataDictionary();
-            controllerContext.Controller.TempData.Add(Honeypot.TempDataKey, FakeInputName);
+            //controllerContext.Controller.TempData.Add(Honeypot.TempDataKey, FakeInputName);
             return controllerContext;
         }
     }

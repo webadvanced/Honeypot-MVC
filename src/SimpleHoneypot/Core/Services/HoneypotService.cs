@@ -18,7 +18,7 @@
 namespace SimpleHoneypot.Core.Services {
     using System.Collections.Specialized;
 
-    using SimpleHoneypot.Core.Common.Thermador.Core.Common;
+    using SimpleHoneypot.Core.Common;
 
     public class HoneypotService : IHoneypotService {
         #region Public Methods and Operators

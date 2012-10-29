@@ -20,7 +20,7 @@ namespace SimpleHoneypot.Extensions {
     using System.Web;
 
     using SimpleHoneypot.Core;
-    using SimpleHoneypot.Core.Common.Thermador.Core.Common;
+    using SimpleHoneypot.Core.Common;
 
     public static class HttpRequestBaseExtensions {
         #region Public Methods and Operators
