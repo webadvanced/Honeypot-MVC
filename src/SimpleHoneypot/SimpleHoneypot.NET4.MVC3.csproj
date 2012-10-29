@@ -48,8 +48,6 @@
     <Compile Include="Core\HoneypotData.cs" />
     <Compile Include="Core\HoneypotInputNameCollection.cs" />
     <Compile Include="Core\HoneypotWorker.cs" />
-    <Compile Include="Core\Services\HoneypotService.cs" />
-    <Compile Include="Core\Services\IHoneypotService.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="HtmlHelpers\HoneypotHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -63,12 +63,6 @@
     <Compile Include="..\SimpleHoneypot\Core\HoneypotWorker.cs">
       <Link>Core\HoneypotWorker.cs</Link>
     </Compile>
-    <Compile Include="..\simplehoneypot\core\services\HoneypotService.cs">
-      <Link>Core\Services\HoneypotService.cs</Link>
-    </Compile>
-    <Compile Include="..\simplehoneypot\core\services\IHoneypotService.cs">
-      <Link>Core\Services\IHoneypotService.cs</Link>
-    </Compile>
     <Compile Include="..\simplehoneypot\extensions\HttpRequestBaseExtensions.cs">
       <Link>Extensions\HttpRequestBaseExtensions.cs</Link>
     </Compile>

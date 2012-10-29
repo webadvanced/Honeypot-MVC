@@ -22,7 +22,7 @@ namespace SimpleHoneypot.Tests {
         public void OnAuthorization_isBotShoultBeTrue_WhenTempDataDoesNotContainHoneypotKey() {
             AuthorizationContext filterContext = new Mock<AuthorizationContext> {DefaultValue = DefaultValue.Mock}.Object;
             Honeypot.SetManuallyHandleBots(false);
-            var attribue = new HoneypotAttribute("/Handle/Bot");
+            var attribue = new HoneypotAttribute(redirectUrl:"/Handle/Bot");
 
             attribue.OnAuthorization(filterContext);
 
@@ -79,7 +79,7 @@ namespace SimpleHoneypot.Tests {
         public void OnAuthorization_ShouldRedirectToProvidedUrl_WhenTempDataKeyHasValue() {
             Honeypot.SetManuallyHandleBots(false);
             var filterContext = MvcHelper.GetAuthorizationContext(_from);
-            var attribue = new HoneypotAttribute("/Handle/Bot");
+            var attribue = new HoneypotAttribute(redirectUrl:"/Handle/Bot");
 
             attribue.OnAuthorization(filterContext);
 

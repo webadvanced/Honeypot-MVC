@@ -14,13 +14,13 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
         public ActionResult About() {
             return View();
         }
-        [Honeypot("/Home/About")]
+        [Honeypot(redirectUrl:"/Home/About")]
         public ActionResult Subscribe(EmailSubscriber subscriber) {
              
             return RedirectToAction("Index");            
         }
 
-        [Honeypot(true)]
+        [Honeypot(manuallyHandleBots: true)]
         public ActionResult SubscribeManual(EmailSubscriber subscriber) {
             //Handle request if the Honeypot Faild
             if (Request.HoneypotFaild())

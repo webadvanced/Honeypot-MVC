@@ -21,30 +21,22 @@ namespace SimpleHoneypot.ActionFilters {
 
     using SimpleHoneypot.Core;
     using SimpleHoneypot.Core.Common;
-    using SimpleHoneypot.Core.
-    Services;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class HoneypotAttribute : FilterAttribute, IAuthorizationFilter {
         #region Constants and Fields
 
         private readonly string redirectUrl;
+        private readonly bool manuallyHandleBots;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public HoneypotAttribute() {
-            this.redirectUrl = "/";
-        }
-
-        public HoneypotAttribute(bool manuallyHandleBots) {
-            this.redirectUrl = "/";
-        }
-
-        public HoneypotAttribute(string redirectUrl) {
-            Check.Argument.IsNotNullOrEmpty(redirectUrl, "redirectUrl");
+        
+        public HoneypotAttribute(bool manuallyHandleBots = false, string redirectUrl = "/") {
             this.redirectUrl = redirectUrl;
+            this.manuallyHandleBots = manuallyHandleBots;
         }
 
         #endregion
@@ -56,7 +48,7 @@ namespace SimpleHoneypot.ActionFilters {
 
             bool isBot = Honeypot.IsBot();
 
-            if(!isBot || Honeypot.ManuallyHandleBots) {
+            if(!isBot || this.manuallyHandleBots || Honeypot.ManuallyHandleBots) {
                 return;
             }
 

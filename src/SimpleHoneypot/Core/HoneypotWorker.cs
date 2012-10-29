@@ -23,8 +23,6 @@ namespace SimpleHoneypot.Core {
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
 
-    using SimpleHoneypot.Core.Services;
-
     public class HoneypotWorker {
         #region Constants and Fields
 
@@ -36,14 +34,11 @@ namespace SimpleHoneypot.Core {
 
         public HoneypotWorker() {
             this.Serializer = new HoneypotDataSerializer();
-            this.HoneypotService = new HoneypotService();
         }
 
         #endregion
 
         #region Properties
-
-        internal HoneypotService HoneypotService { get; set; }
 
         internal HoneypotDataSerializer Serializer { get; set; }
 
@@ -61,13 +56,14 @@ namespace SimpleHoneypot.Core {
         //true if valid
         public bool IsBot(HttpContextBase httpContext) {
             string tokenString = httpContext.Request.Form[HoneypotData.FormKeyFieldName];
-            if (string.IsNullOrEmpty(tokenString))
-            {
+            if (string.IsNullOrEmpty(tokenString)) {
+                httpContext.Items.Add(Honeypot.HttpContextKey, true);
                 return true;
             }
 
             HoneypotData token = this.Serializer.Deserialize(tokenString);
-            bool isBot = this.HoneypotService.IsBot(httpContext.Request.Form, token.InputNameValue);
+
+            bool isBot = !string.IsNullOrEmpty(httpContext.Request.Form[token.InputNameValue]);
             httpContext.Items.Add(Honeypot.HttpContextKey, isBot);
             return isBot;
         }
@@ -96,9 +92,7 @@ namespace SimpleHoneypot.Core {
                 inputName = String.Format("{0}-{1}", keys[0], keys[1]);
             }
 
-            return HoneypotData.Create(inputName);
-
-            
+            return HoneypotData.Create(inputName);   
         }
 
         #endregion
