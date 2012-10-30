@@ -1,4 +1,4 @@
-#What is a honeypot?#
+##What is a honeypot?##
 
 *From wikipedia*: in computer terminology, a honeypot is a trap set to detect, deflect, or in some manner counteract attempts at unauthorized use of information systems. Generally it consists of a computer, data, or a network site that appears to be part of a network, but is actually isolated and monitored, and which seems to contain information or a resource of value to attackers. Simple Honeypot is a honeypot solution for ASP.NET MVC2+.
 
@@ -6,9 +6,9 @@
 
 Simple honeypot will simply stop bots from submitting spam via public forms on your website. There are some plans to make simple honeypot protect agents more types of spam, so check for new releases.
 
-#Changelog:#
+##Changelog:##
 
-##Version 2.0.4686.23906 - October 30 2012##
+###Version 2.0.4686.23906 - October 30 2012###
 
 - Breaking: Constructor overload for HoneypotAttribute has changed.
 - Removed dependency on TempData.
@@ -16,7 +16,7 @@ Simple honeypot will simply stop bots from submitting spam via public forms on y
 - Added HoneypotRuleCollection so users can add custom rules to detect bots.
 - Fixed error when forms are submitted with Ajax.
 
-#Usage#
+##Using it##
 
 Install package from nuget: **Install-Package SimpleHoneypot.MVC** 
 
