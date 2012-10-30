@@ -5,6 +5,13 @@ using System;
 namespace SimpleHoneypot.Tests {
     public class HoneypotTests {
         [Fact]
+        public void Ctor_ShouldSetCorrectDefaults() {
+            Assert.False(Honeypot.ManuallyHandleBots);
+            Assert.Equal(Honeypot.DefaultInputName, HoneypotData.DefaultFieldName);
+            Assert.Equal(Honeypot.CssClassName, HoneypotData.DefaultCssClassName);
+        }
+
+        [Fact]
         public void SetCssClassName_ShouldThrowArgumentException_WhenPassedNullOrEmptyString() {
             Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(null));
             Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(String.Empty));

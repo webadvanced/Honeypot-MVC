@@ -16,18 +16,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SimpleHoneypot.HtmlHelpers {
-    using System;
     using System.Web.Mvc;
 
     using SimpleHoneypot.Core;
 
     public static class HoneypotHelper {
-        #region Constants and Fields
-
-        private static readonly Random Random = new Random();
-
-        #endregion
-
         #region Public Methods and Operators
 
         public static MvcHtmlString HoneypotInput(this HtmlHelper helper) {

@@ -24,8 +24,10 @@ namespace SimpleHoneypot.Core {
     public static class Honeypot {
         #region Constants and Fields
 
-        public static readonly HoneypotWorker Worker;
         public const string HttpContextKey = "__hpIsBot";
+
+        public static readonly HoneypotWorker Worker;
+
         #endregion
 
         #region Constructors and Destructors
@@ -54,6 +56,14 @@ namespace SimpleHoneypot.Core {
 
         #region Public Methods and Operators
 
+        public static MvcHtmlString GetHtml(HtmlHelper helper) {
+            return Worker.GetHtml(helper, new HttpContextWrapper(HttpContext.Current));
+        }
+
+        public static bool IsBot(HttpContextBase context) {
+            return Worker.IsBot(context);
+        }
+
         public static void SeDefaultInputName(string inputName) {
             Check.Argument.IsNotNullOrEmpty(inputName, "inputName");
             DefaultInputName = inputName;
@@ -64,16 +74,8 @@ namespace SimpleHoneypot.Core {
             CssClassName = cssClassName;
         }
 
-        public static void SetManuallyHandleBots(bool b) {
-            ManuallyHandleBots = b;
-        }
-
-        public static MvcHtmlString GetHtml(HtmlHelper helper) {
-            return Worker.GetHtml(helper, new HttpContextWrapper(HttpContext.Current));
-        }
-
-        public static bool IsBot(HttpContextBase context) {
-            return Worker.IsBot(context);
+        public static void SetManuallyHandleBots(bool handleBots) {
+            ManuallyHandleBots = handleBots;
         }
 
         #endregion
