@@ -20,6 +20,8 @@ Simple honeypot will simply stop bots from submitting spam via public forms on y
 
 Install package from nuget: **Install-Package SimpleHoneypot.MVC** 
 
+For more details on using Simple Honeypot, check out the Wiki https://github.com/webadvanced/Honeypot-MVC/wiki
+
 ###What is adds to your solution###
  
 - SimpleHoneypot.dll
