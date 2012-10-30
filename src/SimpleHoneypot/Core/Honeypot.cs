@@ -72,8 +72,8 @@ namespace SimpleHoneypot.Core {
             return Worker.GetHtml(helper, new HttpContextWrapper(HttpContext.Current));
         }
 
-        public static bool IsBot() {
-            return Worker.IsBot(new HttpContextWrapper(HttpContext.Current));
+        public static bool IsBot(HttpContextBase context) {
+            return Worker.IsBot(context);
         }
 
         #endregion

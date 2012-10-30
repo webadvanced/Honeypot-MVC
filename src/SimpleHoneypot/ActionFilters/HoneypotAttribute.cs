@@ -17,6 +17,7 @@
 
 namespace SimpleHoneypot.ActionFilters {
     using System;
+    using System.Web;
     using System.Web.Mvc;
 
     using SimpleHoneypot.Core;
@@ -26,29 +27,57 @@ namespace SimpleHoneypot.ActionFilters {
     public class HoneypotAttribute : FilterAttribute, IAuthorizationFilter {
         #region Constants and Fields
 
-        private readonly string redirectUrl;
         private readonly bool manuallyHandleBots;
+
+        private readonly string redirectUrl;
+
+        private Func<HttpContextBase, bool> isBotFunc;
 
         #endregion
 
         #region Constructors and Destructors
 
-        
-        public HoneypotAttribute(bool manuallyHandleBots = false, string redirectUrl = "/") {
+        public HoneypotAttribute(bool manuallyHandleBots = false, string redirectUrl = "/")
+            : this(Honeypot.IsBot, manuallyHandleBots, redirectUrl) {
+        }
+
+        internal HoneypotAttribute(
+            Func<HttpContextBase, bool> isBotAction, bool manuallyHandleBots = false, string redirectUrl = "/") {
+            this.IsBotFunc = isBotAction;
             this.redirectUrl = redirectUrl;
             this.manuallyHandleBots = manuallyHandleBots;
         }
 
         #endregion
 
+        #region Properties
+
+        internal Func<HttpContextBase, bool> IsBotFunc {
+            get {
+                return this.isBotFunc;
+            }
+            private set {
+                Check.Argument.IsNotNull(value, "IsBotFunc");
+                this.isBotFunc = value;
+            }
+        }
+
+        #endregion
+
+        //For Tests
+
         #region Public Methods and Operators
+
+        public static HoneypotAttribute CreateForTests(Func<HttpContextBase, bool> isBotAction, bool manuallyHandleBots = false, string redirectUrl = "/") {
+            return new HoneypotAttribute(isBotAction, manuallyHandleBots, redirectUrl);
+        }
 
         public void OnAuthorization(AuthorizationContext filterContext) {
             Check.Argument.IsNotNull(filterContext, "filterContext");
 
-            bool isBot = Honeypot.IsBot();
+            bool isBot = this.IsBotFunc(filterContext.HttpContext);
 
-            if(!isBot || this.manuallyHandleBots || Honeypot.ManuallyHandleBots) {
+            if (!isBot || this.manuallyHandleBots || Honeypot.ManuallyHandleBots) {
                 return;
             }
 
