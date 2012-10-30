@@ -33,10 +33,8 @@ namespace SimpleHoneypot.Core {
         #region Constructors and Destructors
 
         static Honeypot() {
+            SetDefaults();
             InputNames = new HoneypotInputNameCollection();
-            CssClassName = HoneypotData.DefaultCssClassName;
-            DefaultInputName = HoneypotData.DefaultFieldName;
-            ManuallyHandleBots = false;
             Worker = new HoneypotWorker();
         }
 
@@ -72,6 +70,12 @@ namespace SimpleHoneypot.Core {
         public static void SetCssClassName(string cssClassName) {
             Check.Argument.IsNotNullOrEmpty(cssClassName, "cssClassName");
             CssClassName = cssClassName;
+        }
+
+        public static void SetDefaults() {
+            CssClassName = HoneypotData.DefaultCssClassName;
+            DefaultInputName = HoneypotData.DefaultFieldName;
+            ManuallyHandleBots = false;
         }
 
         public static void SetManuallyHandleBots(bool handleBots) {

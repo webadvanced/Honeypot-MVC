@@ -40,7 +40,7 @@ namespace SimpleHoneypot.Core {
 
         #region Properties
 
-        internal HoneypotDataSerializer Serializer { get; set; }
+        internal HoneypotDataSerializer Serializer { get; private set; }
 
         #endregion
 
@@ -63,7 +63,9 @@ namespace SimpleHoneypot.Core {
 
             HoneypotData token = this.Serializer.Deserialize(tokenString);
 
-            bool isBot = !string.IsNullOrEmpty(httpContext.Request.Form[token.InputNameValue]);
+            string trap = httpContext.Request.Form[token.InputNameValue];
+
+            bool isBot = (trap == null) || (trap.Length > 0);
             httpContext.Items.Add(Honeypot.HttpContextKey, isBot);
             return isBot;
         }
@@ -72,7 +74,7 @@ namespace SimpleHoneypot.Core {
 
         #region Methods
 
-        internal static IEnumerable<T> Shuffle<T>(IEnumerable<T> source) {
+        public static IEnumerable<T> Shuffle<T>(IEnumerable<T> source) {
             T[] elements = source.ToArray();
             for (int i = elements.Length - 1; i > 0; i--) {
                 int swapIndex = Random.Next(i + 1);
@@ -82,7 +84,7 @@ namespace SimpleHoneypot.Core {
             yield return elements[0];
         }
 
-        internal HoneypotData GetHoneypotData(HttpContextBase httpContext) {
+        public HoneypotData GetHoneypotData(HttpContextBase httpContext) {
             string inputName;
             if (Honeypot.InputNames.Count < 2) {
                 inputName = Honeypot.DefaultInputName;

@@ -1,22 +1,19 @@
-﻿using SimpleHoneypot.Core;
-using Xunit;
-using System;
+﻿namespace SimpleHoneypot.Tests {
+    using System;
 
-namespace SimpleHoneypot.Tests {
+    using SimpleHoneypot.Core;
+
+    using Xunit;
+
     public class HoneypotTests {
-        [Fact]
-        public void Ctor_ShouldSetCorrectDefaults() {
-            Assert.False(Honeypot.ManuallyHandleBots);
-            Assert.Equal(Honeypot.DefaultInputName, HoneypotData.DefaultFieldName);
-            Assert.Equal(Honeypot.CssClassName, HoneypotData.DefaultCssClassName);
-        }
+        #region Public Methods and Operators
 
         [Fact]
-        public void SetCssClassName_ShouldThrowArgumentException_WhenPassedNullOrEmptyString() {
-            Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(null));
-            Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(String.Empty));
+        public void SetAutomaticallyHandleBots_ShouldSetAutomaticallyHandleBots_ToPassedBool() {
+            Honeypot.SetManuallyHandleBots(true);
+            Assert.True(Honeypot.ManuallyHandleBots);
         }
-        
+
         [Fact]
         public void SetCssClassName_ShouldSetTheCssClassNameProperty_WhenPassedAValidString() {
             const string str = "MockCssClass";
@@ -28,9 +25,9 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void SetDefaultInputName_ShouldThrowArgumentException_WhenPassedNullOrEmptyString() {
-            Assert.Throws<ArgumentException>(() => Honeypot.SeDefaultInputName(null));
-            Assert.Throws<ArgumentException>(() => Honeypot.SeDefaultInputName(String.Empty));
+        public void SetCssClassName_ShouldThrowArgumentException_WhenPassedNullOrEmptyString() {
+            Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(null));
+            Assert.Throws<ArgumentException>(() => Honeypot.SetCssClassName(String.Empty));
         }
 
         [Fact]
@@ -44,9 +41,19 @@ namespace SimpleHoneypot.Tests {
         }
 
         [Fact]
-        public void SetAutomaticallyHandleBots_ShouldSetAutomaticallyHandleBots_ToPassedBool() {
-            Honeypot.SetManuallyHandleBots(true);
-            Assert.True(Honeypot.ManuallyHandleBots);
+        public void SetDefaultInputName_ShouldThrowArgumentException_WhenPassedNullOrEmptyString() {
+            Assert.Throws<ArgumentException>(() => Honeypot.SeDefaultInputName(null));
+            Assert.Throws<ArgumentException>(() => Honeypot.SeDefaultInputName(String.Empty));
         }
+
+        [Fact]
+        public void SetDefaults_ShouldSetCorrectDefaults() {
+            Honeypot.SetDefaults();
+            Assert.False(Honeypot.ManuallyHandleBots);
+            Assert.Equal(Honeypot.DefaultInputName, HoneypotData.DefaultFieldName);
+            Assert.Equal(Honeypot.CssClassName, HoneypotData.DefaultCssClassName);
+        }
+
+        #endregion
     }
 }
