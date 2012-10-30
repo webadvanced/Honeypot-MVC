@@ -17,11 +17,12 @@
 
 namespace SimpleHoneypot.Core {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Mvc.Html;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
     public class HoneypotWorker {
         #region Constants and Fields
@@ -61,6 +62,10 @@ namespace SimpleHoneypot.Core {
                 return true;
             }
 
+            if(!this.ValidateRules(httpContext.Request.Form)) {
+                return true;
+            }
+
             HoneypotData token = this.Serializer.Deserialize(tokenString);
 
             string trap = httpContext.Request.Form[token.InputNameValue];
@@ -73,6 +78,19 @@ namespace SimpleHoneypot.Core {
         #endregion
 
         #region Methods
+
+        public bool ValidateRules(NameValueCollection form) {
+            if(!Honeypot.CustomRules.Any()) {
+                return true;
+            }
+
+            foreach(var rule in Honeypot.CustomRules) {
+                bool result = rule(form);
+                if (result) return false;
+            }
+
+            return true;
+        }
 
         public static IEnumerable<T> Shuffle<T>(IEnumerable<T> source) {
             T[] elements = source.ToArray();

@@ -36,6 +36,7 @@ namespace SimpleHoneypot.Core {
             SetDefaults();
             InputNames = new HoneypotInputNameCollection();
             Worker = new HoneypotWorker();
+            CustomRules = new HoneypotRuleCollection();
         }
 
         #endregion
@@ -47,6 +48,8 @@ namespace SimpleHoneypot.Core {
         public static string DefaultInputName { get; private set; }
 
         public static HoneypotInputNameCollection InputNames { get; private set; }
+
+        public static HoneypotRuleCollection CustomRules { get; private set; }
 
         public static bool ManuallyHandleBots { get; private set; }
 

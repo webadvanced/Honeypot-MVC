@@ -1,4 +1,6 @@
 ﻿namespace SimpleHoneypot.Tests {
+    using System;
+
     using SimpleHoneypot.Core;
     using System.Collections.Specialized;
     using Xunit;
@@ -114,6 +116,32 @@
         }
 
         [Fact]
+        public void IsBot_ShouldReturnTrue_WhenValidateRulesReturnsFalse() {
+            // Arrang
+            Honeypot.InputNames.Clear();
+            var worker = new HoneypotWorker();
+            Honeypot.CustomRules.Clear();
+            
+            var token = new HoneypotData(HoneypotData.DefaultFieldName);
+            var serializer = new HoneypotDataSerializer();
+            var form = new NameValueCollection {
+                { "FirstName", "Jon" }, {
+                    HoneypotData.FormKeyFieldName,
+                    serializer.Serialize(token)
+                },
+                {token.InputNameValue, ""}
+            };
+            Func<NameValueCollection, bool> failingRule = (f) => true;
+            Honeypot.CustomRules.Add(failingRule);
+            
+            // Act
+            bool isBot = worker.IsBot(MvcHelper.GetHttpContext(form));
+
+            // Assert
+            Assert.True(isBot);
+        }
+
+        [Fact]
         public void GetHtml_ShouldSetTheCssClassNameOnTrapInput() {
             // Arrange
             var worker = new HoneypotWorker();
@@ -123,6 +151,49 @@
 
             // Assert
             Assert.True(html.Contains(Honeypot.CssClassName));
+        }
+
+        [Fact]
+        public void ValidateRules_ShouldReturnTrue_WhenThereAreNoRules() {
+            // Arrange
+            var worker = new HoneypotWorker();
+            Honeypot.CustomRules.Clear();
+            //Act
+            bool isValid = worker.ValidateRules(new NameValueCollection());
+
+            // Assert
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void ValidateRules_ShouldReturnTrue_WhenAllRulesPass() {
+            // Arrange
+            var worker = new HoneypotWorker();
+            Honeypot.CustomRules.Clear();
+            Func<NameValueCollection, bool> rule = (form) => false;
+            Honeypot.CustomRules.Add(rule);
+            //Act
+            bool isValid = worker.ValidateRules(new NameValueCollection());
+
+            // Assert
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void ValidateRules_ShouldReturnFalse_WhenAnyRuleFails() {
+            // Arrange
+            var worker = new HoneypotWorker();
+            Honeypot.CustomRules.Clear();
+            Func<NameValueCollection, bool> passingRule = (form) => false;
+            Func<NameValueCollection, bool> failingRule = (form) => true;
+            Honeypot.CustomRules.Add(passingRule);
+            Honeypot.CustomRules.Add(failingRule);
+            Honeypot.CustomRules.Add(passingRule);
+            //Act
+            bool isValid = worker.ValidateRules(new NameValueCollection());
+
+            // Assert
+            Assert.False(isValid);
         }
 
         #endregion

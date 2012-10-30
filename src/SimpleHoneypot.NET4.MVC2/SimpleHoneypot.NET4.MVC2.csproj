@@ -58,6 +58,9 @@
     <Compile Include="..\simplehoneypot\core\HoneypotInputNameCollection.cs">
       <Link>Core\HoneypotInputNameCollection.cs</Link>
     </Compile>
+    <Compile Include="..\SimpleHoneypot\Core\HoneypotRuleCollection.cs">
+      <Link>Core\HoneypotRuleCollection.cs</Link>
+    </Compile>
     <Compile Include="..\SimpleHoneypot\Core\HoneypotWorker.cs">
       <Link>Core\HoneypotWorker.cs</Link>
     </Compile>
