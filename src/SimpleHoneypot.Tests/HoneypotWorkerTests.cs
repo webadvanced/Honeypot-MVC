@@ -113,6 +113,18 @@
             Assert.True(isBot);
         }
 
+        [Fact]
+        public void GetHtml_ShouldSetTheCssClassNameOnTrapInput() {
+            // Arrange
+            var worker = new HoneypotWorker();
+
+            //Act
+            string html = worker.GetHtml(MvcHelper.GetHtmlHelper(), MvcHelper.GetHttpContext()).ToString();
+
+            // Assert
+            Assert.True(html.Contains(Honeypot.CssClassName));
+        }
+
         #endregion
     }
 }
