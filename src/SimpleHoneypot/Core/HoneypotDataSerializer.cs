@@ -23,15 +23,15 @@ namespace SimpleHoneypot.Core {
 
     using SimpleHoneypot.Core.Common;
 
-    internal class HoneypotDataSerializer {
+    public class HoneypotDataSerializer {
         // Testing hooks
 
         #region Constants and Fields
 
-        internal Func<string, byte[]> Decoder =
+        public Func<string, byte[]> Decoder =
             (value) => MachineKey.Decode(Base64ToHex(value), MachineKeyProtection.All);
 
-        internal Func<byte[], string> Encoder =
+        public Func<byte[], string> Encoder =
             (bytes) => HexToBase64(MachineKey.Encode(bytes, MachineKeyProtection.All).ToUpperInvariant());
 
         #endregion
@@ -51,8 +51,8 @@ namespace SimpleHoneypot.Core {
                     };
                 }
             }
-            catch (Exception ex) {
-                throw ex;
+            catch(Exception e)  {
+                throw new InvalidOperationException(e.Message);
             }
         }
 

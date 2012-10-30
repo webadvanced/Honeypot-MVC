@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HoneypotAttributeTests.cs" />
+    <Compile Include="HoneypotDataSerializerTests.cs" />
     <Compile Include="HoneypotHelperTests.cs" />
     <Compile Include="HoneypotInputNameCollectionTests.cs" />
     <Compile Include="HoneypotTests.cs" />
