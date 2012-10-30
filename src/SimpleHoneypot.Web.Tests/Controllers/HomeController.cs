@@ -29,5 +29,9 @@ namespace SimpleHoneypot.Web.Tests.Controllers {
             return RedirectToAction("Index");
         }
 
+        [Honeypot(redirectUrl: "/Home/About")]
+        public JsonResult AjaxPost() {
+            return Json(true);
+        }
     }
 }

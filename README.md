@@ -6,6 +6,16 @@
 
 Simple honeypot will simply stop bots from submitting spam via public forms on your website. There are some plans to make simple honeypot protect agents more types of spam, so check for new releases.
 
+#Changelog:#
+
+##Version 2.0.##
+
+- Breaking: Constructor overload for HoneypotAttribute has changed.
+- Removed dependency on TempData.
+- Added token hidden input.
+- Added HoneypotRuleCollection so users can add custom rules to detect bots.
+- Fixed error when forms are submitted with Ajax.
+
 #Usage#
 
 Install package from nuget: **Install-Package SimpleHoneypot.MVC** 

@@ -53,6 +53,7 @@
         {
             // Arrang
             Honeypot.InputNames.Clear();
+            Honeypot.CustomRules.Clear();
             var worker = new HoneypotWorker();
             var token = new HoneypotData(HoneypotData.DefaultFieldName);
             var serializer = new HoneypotDataSerializer();
@@ -75,6 +76,7 @@
         {
             // Arrang
             Honeypot.InputNames.Clear();
+            Honeypot.CustomRules.Clear();
             var worker = new HoneypotWorker();
             var token = new HoneypotData(HoneypotData.DefaultFieldName);
             var serializer = new HoneypotDataSerializer();
@@ -98,6 +100,7 @@
         {
             // Arrang
             Honeypot.InputNames.Clear();
+            Honeypot.CustomRules.Clear();
             var worker = new HoneypotWorker();
             var token = new HoneypotData(HoneypotData.DefaultFieldName);
             var serializer = new HoneypotDataSerializer();
