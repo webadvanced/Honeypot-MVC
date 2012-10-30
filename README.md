@@ -8,7 +8,7 @@ Simple honeypot will simply stop bots from submitting spam via public forms on y
 
 #Changelog:#
 
-##Version 2.0.##
+##Version 2.0.4686.23906 - October 30 2012##
 
 - Breaking: Constructor overload for HoneypotAttribute has changed.
 - Removed dependency on TempData.
