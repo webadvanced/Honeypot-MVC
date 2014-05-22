@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot.NET4.MVC2", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot.MVC4", "src\SimpleHoneypot.MVC4\SimpleHoneypot.MVC4.csproj", "{639DE9DC-0BCA-4A9A-BBB2-CF804636AF3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleHoneypot.MVC5", "src\SimpleHoneypot.MVC5\SimpleHoneypot.MVC5.csproj", "{4C462CC7-28F4-4FE8-8440-544699B10D2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{639DE9DC-0BCA-4A9A-BBB2-CF804636AF3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{639DE9DC-0BCA-4A9A-BBB2-CF804636AF3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{639DE9DC-0BCA-4A9A-BBB2-CF804636AF3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C462CC7-28F4-4FE8-8440-544699B10D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C462CC7-28F4-4FE8-8440-544699B10D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C462CC7-28F4-4FE8-8440-544699B10D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C462CC7-28F4-4FE8-8440-544699B10D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

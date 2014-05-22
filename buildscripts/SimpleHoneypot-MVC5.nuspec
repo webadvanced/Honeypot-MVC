@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>SimpleHoneypot.MVC5</id>
+    <version></version>
+    <authors>Web Advanced</authors>
+	<licenseUrl>https://github.com/webadvanced/Honeypot-MVC/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/webadvanced/Honeypot-MVC</projectUrl>
+    <iconUrl>http://clients.wadev.com/hp_nuget/honeypot.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC5.</description>
+    <summary>A simple honeypot to replace your standard reCAPTCHA for ASP.NET MVC5.</summary>
+    <language>en-US</language>
+	<dependencies>
+      <dependency id="WebActivator" version="1.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\content\**\*.pp" target="content" />
+	<file src="lib\content\**\*.txt" target="content" />
+	<file src="lib\**\*MVC5.dll" target="lib" />
+  </files>
+</package>
